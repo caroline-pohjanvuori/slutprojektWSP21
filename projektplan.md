@@ -8,22 +8,22 @@ Jag skall göra en promodoro hemsida för datorn. hemsidan skall kunna vara en s
 ## 3. Databas med ER-diagram (Bild på ER-diagram).
 ![erd schema](erd.png)
 ## 4. Arkitektur (Beskriv filer och mappar - vad gör/innehåller de?).
-layout.slim
-index.slim
+
+
 - nedräknings timer
 - länkar till alla andra sidor
-login.slim
+
 - sida för inlogg och
-information
-options.slim
+
+
 - kan ändra tidsinställningar för användaren
-task.slim
+
 - skapa tasks
 - radera tasks
 - ändra på tasks
 - beräknar hur mycket fokus tid som spenderas på specifika tasks
 - ger tasksen färger
-statistics.slim
+
 - visar hur mycket tid per dag som man använt fokus timern
 
 
