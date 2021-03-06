@@ -29,11 +29,11 @@ end
 
 get('/tasks') do
   id = session[:id].to_i
-  db=SQLite3::Database.new('db/Todo2020.db')
+  db=SQLite3::Database.new('db/promodoro.db')
   db.results_as_hash = true
-  result = db.execute("SELECT * FROM todo WHERE user_id = ?", id)
+  result = db.execute("SELECT * FROM tasks WHERE user_id = ?", id)
   p "alla results fran #{result}"
-  slim(:"/tasks", locals:{todos:result})
+  slim(:"/tasks", locals:{tasks:result})
 end
 
 #get('/showlogin') do
@@ -57,16 +57,17 @@ end
   #end
 #end
 
-post('/todo') do
-  newTodo = params[:todo]
+post('/tasks') do
+  newTask = params[:task]
+  description= params[:description]
   user_id = session[:id]
   db=SQLite3::Database.new('db/Todo2020.db') 
-  db.execute("INSERT INTO todo (content, user_id) VALUES (?,?)", newTodo, user_id)
-  redirect('/todos') 
+  db.execute("INSERT INTO tasks (task, description, user_id) VALUES (?, ?, ?)", newTask, description, user_id)
+  redirect('/tasks') 
 end
 
 
-get('/todos/:id/edit') do
+get('/taska/:id/edit') do
   id = params[:id].to_i
   db=SQLite3::Database.new('db/Todo2020.db') 
   db.results_as_hash = true
@@ -74,7 +75,7 @@ get('/todos/:id/edit') do
   slim(:"/todos/edit", locals:{result:result})
 end
 
-post('/todos/:id/update') do
+post('/tasks/:id/update') do
   content= params[:updatedTodo]
   id=params[:id].to_i
   db=SQLite3::Database.new('db/Todo2020.db') 
@@ -83,7 +84,7 @@ post('/todos/:id/update') do
 end
 
 
-post('/todos/:id/delete') do
+post('/tasks/:id/delete') do
   id= params[:id].to_i
   db=SQLite3::Database.new('db/Todo2020.db') 
   db.execute("DELETE FROM todo WHERE id = ?", id)
