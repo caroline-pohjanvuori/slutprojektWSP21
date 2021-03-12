@@ -6,8 +6,15 @@ require 'bcrypt'
 
 enable :sessions
 
+def connect_to_db(path)
+  db = SQLite3::Database.new(path)
+  db.results_as_hash = true
+  return db
+ end
+ 
+
 get('/') do
-  slim(:register)
+  slim(:"/index")
 end
 
 #post('/users/new')do
@@ -27,13 +34,12 @@ end
   #end
 #end
 
-get('/tasks') do
+get('/task/tasklist') do
+  db = connect_to_db('db/promodoro.db')
   id = session[:id].to_i
-  db=SQLite3::Database.new('db/promodoro.db')
-  db.results_as_hash = true
-  result = db.execute("SELECT * FROM tasks WHERE user_id = ?", id)
+  result = db.execute("SELECT * FROM tasks WHERE userid = ?", id)
   p "alla results fran #{result}"
-  slim(:"/tasks", locals:{tasks:result})
+  slim(:"/tasklist", locals:{tasks:result})
 end
 
 #get('/showlogin') do
@@ -57,37 +63,38 @@ end
   #end
 #end
 
-post('/tasks') do
+post('/tasklist') do
   newTask = params[:task]
   description= params[:description]
   user_id = session[:id]
-  db=SQLite3::Database.new('db/Todo2020.db') 
-  db.execute("INSERT INTO tasks (task, description, user_id) VALUES (?, ?, ?)", newTask, description, user_id)
+  db=SQLite3::Database.new('db/promodoro.db') 
+  db.execute("INSERT INTO tasks (taskname, description, userid) VALUES (?, ?, ?)", newTask, description, user_id)
   redirect('/tasks') 
 end
 
 
-get('/taska/:id/edit') do
+get('/taskList/:id/edit') do
   id = params[:id].to_i
-  db=SQLite3::Database.new('db/Todo2020.db') 
+  db=SQLite3::Database.new('db/promodoro.db') 
   db.results_as_hash = true
-  result = db.execute("SELECT * FROM todo WHERE id = ?", id).first
-  slim(:"/todos/edit", locals:{result:result})
+  result = db.execute("SELECT * FROM tasks WHERE id = ?", id).first
+  slim(:"/tasks/edit", locals:{result:result})
 end
 
-post('/tasks/:id/update') do
-  content= params[:updatedTodo]
+post('/taskList/:id/update') do
+  content= params[:updatedTask]
+  content= params[:updateddesc]
   id=params[:id].to_i
-  db=SQLite3::Database.new('db/Todo2020.db') 
-  db.execute("UPDATE todo SET content = ? WHERE id = ?", content, id)
-  redirect('/todos')
+  db=SQLite3::Database.new('db/promodoro.db') 
+  db.execute("UPDATE tasks SET taskcontent = ? WHERE id = ?", content, id)
+  redirect('/tasks')
 end
 
 
-post('/tasks/:id/delete') do
+post('/taskList/:id/delete') do
   id= params[:id].to_i
-  db=SQLite3::Database.new('db/Todo2020.db') 
-  db.execute("DELETE FROM todo WHERE id = ?", id)
-  redirect('/todos')
+  db=SQLite3::Database.new('db/promodoro.db') 
+  db.execute("DELETE FROM tasks WHERE id = ?", id)
+  redirect('/tasks')
 end
 

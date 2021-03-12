@@ -2,3 +2,10 @@
     skapat en prototyp av databasen och försökt ta reda på hur jag skall göra timern. är en stor utmaning så jag skall först prioritera användar funnktionerna och task funktionerna
 2021-02-05
     För trött för att arbeta, men har skapat relations tabellen för tasks och färger i databasen.
+2021-03-05 
+    varit inaktiv för jag har varit förkyld, påbörjade programeringen och uppstruktureringen av task hemsidan. väntar med att fixa med task colors tills 
+    jag är mer färdig. snodde kod från todo avstämningen ,då det ända som behöver ändras på är routsen på det. 
+2021-03-12
+    jobbat på att bygga task hemsidan, kommit på att jag måste fixa med inlogget innan jag ser om jag gjort den korrekta dokumenteringen,
+    då hela hemsidan tar från databasen för usern om den ska visa något. Nästa gång skall jag fixa mer med helper funktioner och before block
+    då jag vill att index skall visa olika saker om du är inloggad eller inte. 

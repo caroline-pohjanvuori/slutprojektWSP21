@@ -1,0 +1,13 @@
+h1 tasks 
+p you can write up what you need to get done throught this task list 
+
+-tasks.each do |task|
+    p = task["content"]
+    a href="taskslist/#{task['id']}/edit" update
+    form action="tasklist/#{task['id']}/delete" method="post"
+        input type="submit" value="done"
+
+
+form action="/tasklist" method="post"
+    input type="text" name="task" placeholder="new task"
+    input type="submit" value="create new task"
