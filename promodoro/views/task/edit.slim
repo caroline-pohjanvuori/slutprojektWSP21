@@ -1,0 +1,12 @@
+form action="/taskList/#{update['id']}/update" method="POST"
+    input type="text" name="updatedtask" value="#{update['taskname']}"
+    input type="text" name="updateddesc" value="#{update['description']}"
+    select id="col" name="col" size="5" 
+        option value="1" white
+        option value="2" red
+        option value="4" orange
+        option value="5" green
+        option value="3" blue
+    input type="submit" value="update task"
+    
+    

@@ -2,12 +2,20 @@ h1 tasks
 p you can write up what you need to get done throught this task list 
 
 -tasks.each do |task|
-    p = task["content"]
-    a href="taskslist/#{task['id']}/edit" update
+    h2 = task["taskname"]
+    p = task["description"]
+    a href="tasklist/#{task['id']}/edit" update
     form action="tasklist/#{task['id']}/delete" method="post"
         input type="submit" value="done"
 
 
 form action="/tasklist" method="post"
     input type="text" name="task" placeholder="new task"
+    input type="text" name="desc" placeholder="description"
+    select id="col" name="col" size="5" 
+        option value="1" white
+        option value="2" red
+        option value="4" orange
+        option value="5" green
+        option value="3" blue 
     input type="submit" value="create new task"

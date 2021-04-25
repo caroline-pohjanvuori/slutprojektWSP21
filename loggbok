@@ -9,3 +9,11 @@
     jobbat på att bygga task hemsidan, kommit på att jag måste fixa med inlogget innan jag ser om jag gjort den korrekta dokumenteringen,
     då hela hemsidan tar från databasen för usern om den ska visa något. Nästa gång skall jag fixa mer med helper funktioner och before block
     då jag vill att index skall visa olika saker om du är inloggad eller inte. 
+2021-04-något
+    Gjort inlogg sidan och ett fungerande registrerings hemsida. filat till tasks så man kan lägga till och radera.
+    skall tills nästa gång göra så man kan uppdatera dem.
+2021-04-23
+    bråkat med att lägga till färger i task funktionen. fortfarande bråkar. vet inte exakt hur jag skall få ut värderna i slim sidan
+    Kanske kommer forsätta bråka med annat och komma tillbaks senare på det. För någon anledning vill inte description läggas till när jag gör
+    ett nytt task. skall försöka fixa med det. Annars har jag lyckats göra så ändring och inlägg av färger i relations tabellen funktionerna
+    skall se hur mycket jag kan arbeta i helgen. väldigt trött.
