@@ -15,11 +15,19 @@ def connect_to_db(path)
  
 
 get('/') do
-  slim(:"/index")
+  result = true
+  if (session[:id] ==  nil)
+    result = false
+  end
+  slim(:"/index", locals:{login:result})
 end
 
 get('/showregister') do
   slim(:"/register")
+end
+
+get('/error') do
+  slim(:"/error")
 end
 
 post('/users/new')do
@@ -59,7 +67,7 @@ post('/login') do
     redirect('/')
   else
     #error
-    "lösenordet matchade ej"
+    p "lösenordet matchade ej"
   end
 end
 
@@ -71,11 +79,18 @@ get('/tasklist') do
   slim(:"task/tasklist", locals:{tasks:result})
 end
 
+before ('/tasklist') do
+    p "Before KÖRS, session_user_id är #{session[:id]}."
+    if (session[:id] ==  nil) && (request.path_info != '/')
+      session[:error] = "You need to log in to see this"
+      redirect('/error')
+    end
+   end
 
 post('/tasklist') do
   #skapar nya tasks
   newTask = params[:task]
-  description= params[:description]
+  description= params[:desc]
   taskcolor = params[:col].to_i
   user_id = session[:id]
   db = connect_to_db('db/promodoro.db')
@@ -86,12 +101,26 @@ post('/tasklist') do
   redirect('/tasklist') 
 end
 
+before do
+  if (request.path_info == '/tasklist/:id/edit') ||(request.path_info == '/tasklist/:id/delete') 
+    p "Before KÖRS, session_user_id är #{session[:id]}."
+      taskId = params[:id]
+      db = connect_to_db('db/promodoro.db')
+      taskUserId = db.execute("SELECT userId from tasks WHERE id=?", taskid).first
+      if (session[:id] != taskUserId)
+        session[:error] = "You do not have access or authority over this"
+        redirect('/error')
+      end
+    end
+ end
+ 
 
 get('/tasklist/:id/edit') do
   #första steg för att edita tasks. Det som händer när du trycker på knappen
   id = params[:id].to_i
   db = connect_to_db('db/promodoro.db') 
   db.results_as_hash = true
+  db.execute("")
   result = db.execute("SELECT * FROM tasks WHERE id = ?", id).first
   slim(:"/task/edit", locals:{update:result})
 end

@@ -4,9 +4,8 @@
         form action="/starttimer" method="POST"
             input type="submit" value="start"
     nav
-        a href="/tasklist" task
-        br/
-        a href="/options" option
+        -if login == true 
+            a href="/tasklist" task
         br/
         a href="/showlogin" login 
         br/
