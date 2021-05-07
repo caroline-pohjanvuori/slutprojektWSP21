@@ -17,3 +17,6 @@
     Kanske kommer forsätta bråka med annat och komma tillbaks senare på det. För någon anledning vill inte description läggas till när jag gör
     ett nytt task. skall försöka fixa med det. Annars har jag lyckats göra så ändring och inlägg av färger i relations tabellen funktionerna
     skall se hur mycket jag kan arbeta i helgen. väldigt trött.
+2021-05-07
+    Skrivit before block som gör att tasks endast kan avändas av användaren. Har också gjord tasklistan otillkomlig
+    om användaren ej är inloggad. Nästa lektion skall jag skriva mer om arkitekturen på sidan i projektplan.md
